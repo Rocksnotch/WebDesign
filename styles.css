@@ -9,9 +9,21 @@
 }
 
 .headerTop{
-    background-image: url(images/test.jpg);
+    background-image: url(images/banner.webp);
 }
 
-.navbarNav {
+.nav-link {
     color: white;
+}
+
+.mainContent {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    color: white;
+}
+
+.bottomFil {
+    background-color: #06404b;
+    padding: 30px;
 }
