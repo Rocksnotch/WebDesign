@@ -1,6 +1,5 @@
 .navbar {
-    background-color: #007BFF;
-    padding-left: 15px;
+    background-color: #06404b;
 }
 
 .headImg {
@@ -11,8 +10,4 @@
 
 .headerTop{
     background-image: url(images/test.jpg);
-    background-attachment: fixed;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
