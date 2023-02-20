@@ -2,6 +2,10 @@
     background-color: #06404b;
 }
 
+body {
+    background-color: lightslategray;
+}
+
 .headImg {
     padding-left: 15px;
     padding-top: 15px;
@@ -28,4 +32,18 @@
     padding: 30px;
     position: relative;
     bottom: -75px;
+}
+
+.departmentList {
+    text-align: center;
+    padding-top: 15px;
+}
+
+#button:focus, #button:hover {
+    background-color: #e59827;
+    color: white;
+}
+
+.content {
+    display: none;
 }

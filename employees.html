@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Aperture Solar - Departments </title>
+        <link rel="icon" href="images/logo-single.webp">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <script src="js/bootstrap.bundle.min.js"></script>
+          <div class="container-fluid headerTop">
+              <div class="row">
+                  <div class="column">
+                      <img src="images/logo-full.webp" class="img-fluid headImg" alt="..." width="300px" height="150px">
+                  </div>
+              </div>
+          </div>
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="home.html">
+                    <img src="images/logo-single.webp" alt="" width="30" height="30">
+                  </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active current" aria-current="page" href="employees.html" style="color:lightgreen">Departments</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          <div class="container-fluid departmentList">
+            <div class="row">
+                <div class="col">
+                    <input id="button" type="button" value="Administration" onclick="loadAdmin()"> 
+                </div>
+                <div class="col">
+                    <input id="button" type="button" value="Marketing" onclick="loadMarketing()">
+                </div>
+                <div class="col">
+                    <input id="button" type="button" value="Product Development" onclick="loadProductDev()">
+                </div>
+                <div class="col">
+                    <input id="button" type="button" value="Product Testing" onclick="loadProductTest()">
+                </div>
+                <div class="col">
+                    <input id="button" type="button" value="R&D" onclick="loadRnD()">
+                </div>
+            </div>
+          </div>
+
+          <div id="administration" class="container-fluid content">
+            <div class="row">
+                <div class="col">
+                    This is a test.
+                </div>
+            </div>
+          </div>
+
+          <div id="marketing" class="container-fluid content">
+            <div class="row">
+                <div class="col">
+                    This is a test2.
+                </div>
+            </div>
+          </div>
+
+          <div id="productDev" class="container-fluid content">
+            <div class="row">
+                <div class="col">
+                    This is a test3.
+                </div>
+            </div>
+          </div>
+
+          <div id="productTest" class="container-fluid content">
+            <div class="row">
+                <div class="col">
+                    This is a test4.
+                </div>
+            </div>
+          </div>
+
+          <div id="rnd" class="container-fluid content">
+            <div class="row">
+                <div class="col">
+                    This is a test5.
+                </div>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+            var button = document.getElementById("adminButton")
+            var admin = document.getElementById("administration");
+            var marketing = document.getElementById("marketing");
+            var productDev = document.getElementById("productDev");
+            var productTest = document.getElementById("productTest");
+            var rnd = document.getElementById("rnd");
+            var cont = document.getElementsByClassName("content");
+
+            function hideAll() {
+                admin.style.display="none";
+                marketing.style.display="none";
+                productDev.style.display="none";
+                productTest.style.display="none";
+                rnd.style.display="none";
+            }
+
+            function loadAdmin() {
+                hideAll();
+                admin.style.display="inline";
+            }
+
+            function loadMarketing() {
+                hideAll();
+                marketing.style.display="inline";
+            }
+
+            function loadProductDev() {
+                hideAll();
+                productDev.style.display="inline";
+            }
+
+            function loadProductTest() {
+                hideAll();
+                productTest.style.display="inline";
+            }
+
+            function loadRnD() {
+                hideAll();
+                rnd.style.display="inline";
+            }
+
+          </script>
+
+          <div class="container-fluid bottomFil">
+            <div class="row">
+                <div class="column">
+                  
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
