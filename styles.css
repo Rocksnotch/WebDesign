@@ -1,9 +1,32 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 .navbar {
     background-color: #06404b;
 }
 
 body {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "main" "footer";
+    grid-template-rows: 1fr 80px;
     background-color: lightslategray;
+}
+
+main {
+    background-color: lightslategray;
+    grid-area: main;
+}
+
+footer {
+    background-color: #06404b;
+}
+
+.row {
+    align-items: center;
 }
 
 .headImg {
@@ -27,13 +50,6 @@ body {
     color: white;
 }
 
-.bottomFil {
-    background-color: #06404b;
-    padding: 30px;
-    position: relative;
-    bottom: -75px;
-}
-
 .departmentList {
     text-align: center;
     padding-top: 15px;
@@ -46,4 +62,6 @@ body {
 
 .content {
     display: none;
+    text-align: center;
+    align-items: center;
 }

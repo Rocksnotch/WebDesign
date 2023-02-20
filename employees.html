@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+      <main>
         <script src="js/bootstrap.bundle.min.js"></script>
           <div class="container-fluid headerTop">
               <div class="row">
@@ -108,7 +109,6 @@
             var productTest = document.getElementById("productTest");
             var rnd = document.getElementById("rnd");
             var cont = document.getElementsByClassName("content");
-
             function hideAll() {
                 admin.style.display="none";
                 marketing.style.display="none";
@@ -116,40 +116,33 @@
                 productTest.style.display="none";
                 rnd.style.display="none";
             }
-
             function loadAdmin() {
                 hideAll();
+
                 admin.style.display="inline";
             }
-
             function loadMarketing() {
                 hideAll();
                 marketing.style.display="inline";
             }
-
             function loadProductDev() {
                 hideAll();
                 productDev.style.display="inline";
             }
-
             function loadProductTest() {
                 hideAll();
                 productTest.style.display="inline";
             }
-
             function loadRnD() {
                 hideAll();
                 rnd.style.display="inline";
             }
-
           </script>
+        </main>
 
-          <div class="container-fluid bottomFil">
-            <div class="row">
-                <div class="column">
-                  
-                </div>
+          <footer>
+            <div>
             </div>
-        </div>
+          </footer>
     </body>
 </html>
