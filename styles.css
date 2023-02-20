@@ -55,13 +55,20 @@ footer {
     padding-top: 15px;
 }
 
+#button {
+    width: 175px;
+}
+
 #button:focus, #button:hover {
     background-color: #e59827;
     color: white;
 }
 
-.content {
+.contentEmp {
     display: none;
     text-align: center;
     align-items: center;
+    padding-top: 25px;
+    padding-left: 125px;
+    padding-right: 125px;
 }
