@@ -19,6 +19,7 @@ body {
 main {
     background-color: lightslategray;
     grid-area: main;
+    padding-bottom: 25px;
 }
 
 footer {
@@ -69,6 +70,11 @@ footer {
     text-align: center;
     align-items: center;
     padding-top: 25px;
-    padding-left: 125px;
-    padding-right: 125px;
+    padding-left: 325px;
+    padding-right: 325px;
+}
+
+.employeePic {
+    width: 240px;
+    height: 300px;
 }
