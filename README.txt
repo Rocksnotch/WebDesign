@@ -6,7 +6,7 @@
 -----Updates from P2-----
 -Added 'Employees' page
 -Employees page includes 5 buttons, all with hover and active colors
--Footer is now dynamic, and will always stick to the bottom of the page
+-Footer is now dynamic, and will always stick to the bottom of the page. Result splits site into a 'main' body and a 'footer' body.
 -Hover buttons are the dynamic CSS for this page
 -Missing an 'All' button, but appears P3 will want this so will wait to add till then
 -5 employee categories, 3 employees each category
