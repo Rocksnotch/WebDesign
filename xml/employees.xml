@@ -1,0 +1,58 @@
+<?xml version ="1.0" encoding="utf-8"?>
+<Departments>
+	<Department attribute="admin">
+		<Employee attribute="Johnson Cavet">
+			<Position>CEO</Position>
+		</Employee>
+		<Employee attribute="Wilhelm Cathidy">
+			<Position>COO</Position>
+		</Employee>
+		<Employee attribute="Karen Wilde">
+			<Position>CFO</Position>
+		</Employee>
+	</Department>
+	<Department attribute="market">
+		<Employee attribute="Jonathan Casey">
+			<Position>Head of Marketing</Position>
+		</Employee>
+		<Employee attribute="Jessie Robertson">
+			<Position>Sales Associate</Position>
+		</Employee>
+		<Employee attribute="Krill Jacobson">
+			<Position>Sales Associate</Position>
+		</Employee>
+	</Department>
+	<Department attribute="develop">
+		<Employee attribute="Shella DeVie">
+			<Position>Lead Designer</Position>
+		</Employee>
+		<Employee attribute="Jeremy Fitzgerald">
+			<Position>Product Overwatch</Position>
+		</Employee>
+		<Employee attribute="Vanessa Laurel">
+			<Position>Final Pass Technician</Position>
+		</Employee>
+	</Department>
+	<Department attribute="testing">
+		<Employee attribute="Johnny Patterson">
+			<Position>Head Tester</Position>
+		</Employee>
+		<Employee attribute="John Quaser">
+			<Position>Testing Associate</Position>
+		</Employee>
+		<Employee attribute="Jon Realson">
+			<Position>Testing Associate</Position>
+		</Employee>
+	</Department>
+	<Department attribute="research">
+		<Employee attribute="Dr. Kyle Reasit">
+			<Position>Chief Researcher</Position>
+		</Employee>
+		<Employee attribute="Dr. Robert Kalienson">
+			<Position>Materials Researcher</Position>
+		</Employee>
+		<Employee attribute="Jonsey">
+			<Position>Lab Rat</Position>
+		</Employee>
+	</Department>
+</Departments>
