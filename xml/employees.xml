@@ -3,56 +3,71 @@
 	<Department attribute="admin">
 		<Employee attribute="Johnson Cavet">
 			<Position>CEO</Position>
+			<Picture>ceo.jpg</Picture>
 		</Employee>
 		<Employee attribute="Wilhelm Cathidy">
 			<Position>COO</Position>
+			<Picture>coo.jpg</Picture>
 		</Employee>
 		<Employee attribute="Karen Wilde">
 			<Position>CFO</Position>
+			<Picture>cfo.jpg</Picture>
 		</Employee>
 	</Department>
 	<Department attribute="market">
 		<Employee attribute="Jonathan Casey">
 			<Position>Head of Marketing</Position>
+			<Picture>head.webp</Picture>
 		</Employee>
 		<Employee attribute="Jessie Robertson">
 			<Position>Sales Associate</Position>
+			<Picture>salesassoc1.webp</Picture>
 		</Employee>
 		<Employee attribute="Krill Jacobson">
 			<Position>Sales Associate</Position>
+			<Picture>salesassoc2.jpg</Picture>
 		</Employee>
 	</Department>
 	<Department attribute="develop">
 		<Employee attribute="Shella DeVie">
 			<Position>Lead Designer</Position>
+			<Picture>leaddesigner.jpg</Picture>
 		</Employee>
 		<Employee attribute="Jeremy Fitzgerald">
 			<Position>Product Overwatch</Position>
+			<Picture>productoverwatch.jpg</Picture>
 		</Employee>
 		<Employee attribute="Vanessa Laurel">
 			<Position>Final Pass Technician</Position>
+			<Picture>finalpasstech.jpg</Picture>
 		</Employee>
 	</Department>
 	<Department attribute="testing">
 		<Employee attribute="Johnny Patterson">
 			<Position>Head Tester</Position>
+			<Picture>headtester.webp</Picture>
 		</Employee>
 		<Employee attribute="John Quaser">
 			<Position>Testing Associate</Position>
+			<Picture>testingassoc1.jpg</Picture>
 		</Employee>
 		<Employee attribute="Jon Realson">
 			<Position>Testing Associate</Position>
+				<Picture>testingassoc2.jpg</Picture>
 		</Employee>
 	</Department>
 	<Department attribute="research">
 		<Employee attribute="Dr. Kyle Reasit">
 			<Position>Chief Researcher</Position>
+			<Picture>chiefresearcher.webp</Picture>
 		</Employee>
 		<Employee attribute="Dr. Robert Kalienson">
 			<Position>Materials Researcher</Position>
+			<Picture>materialsresearcher.jpg</Picture>
 		</Employee>
 		<Employee attribute="Jonsey">
 			<Position>Lab Rat</Position>
+			<Picture>labrat.jpg</Picture>
 		</Employee>
 	</Department>
 </Departments>
