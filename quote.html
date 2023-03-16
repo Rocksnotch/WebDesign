@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Aperture Solar - Quote </title>
+    <link rel="icon" href="images/logo-single.webp">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script>
+
+            function createForm() {
+                $("#formArea").append(
+                    $("<form/>", {
+                        action: '#',
+                        method: '#'
+                    }).append(
+                        $("<input/>", {
+                            type: 'text',
+                            id: 'vname',
+                            name: 'name',
+                            placeholder: 'Your Name'
+                        })
+                    )
+                )
+
+                $("#vname").before("Your Name: ");
+            }
+
+            $(document).on('click', '#submit', function () {
+                if ($("#vname").val() == 0) {
+                    alert("Please put something into the field");
+                    $("#vname").focus();
+                } else {
+                    alert($("#vname").val());
+                }
+            });
+
+            $(document).ready(function () {
+                createForm();
+                
+
+            });
+        </script>
+
+        <div class="container-fluid headerTop">
+            <div class="row">
+                <div class="col">
+                    <img src="images/logo-full.webp" class="img-fluid headImg" alt="..." width="300px" height="150px">
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="home.html">
+                    <img src="images/logo-single.webp" alt="" width="30" height="30">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="employees.html">Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active current" aria-current="page" href="quote.html" style="color:lightgreen">Quote</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mainContent">
+            <p>Wanting to get solar installed on your home? Hate having to use calculators? Great! Getting a quote has never been easier when using the</p>
+            <h1>Aperture Science Solar Quote Calculator™</h1>
+            <div id="formArea"></div>
+
+        </div>
+    </main>
+    <footer>
+        <div>
+        </div>
+    </footer>
+</body>
+</html> 
