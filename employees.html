@@ -15,6 +15,7 @@
 
             var xmlDoc;
             var allLoad = 0;
+            
 
             function parseXML(xml) {
                 var xmlhttp = new XMLHttpRequest();
@@ -32,13 +33,15 @@
             }
 
             function loadContent(element) {
+                var allDept = xmlDoc.getElementsByTagName("Department");
+                var allEmp = xmlDoc.getElementsByTagName("Employee");
+                var allPos = xmlDoc.getElementsByTagName("Position");
+                var allPic = xmlDoc.getElementsByTagName("Picture");
+                var exCount = 0;
+                var deptCount = 0;
 
                 var content = "";
-
-                if (allLoad == 0) { //
-                    var allEmp = xmlDoc.getElementsByTagName("Employee");
-                    var allPos = xmlDoc.getElementsByTagName("Position");
-                    var allPic = xmlDoc.getElementsByTagName("Picture");
+                if (allLoad == 0) { //default, loads all the content on page load
                     for (var i = 0; i < allEmp.length; i++) {
 
                         content += allEmp[i].getAttribute("name") + "<br />";
@@ -55,6 +58,25 @@
                         loadContent(null);
                     } else {
                         //print the actual stuff here
+                        for (var i = 0; i < allDept.length; i++) {
+                            if (allDept[i].getAttribute("attribute") == element.value) { //department found! Print out everyone!
+                                alert("Dept: " + i);
+                                exCount = deptCount * 3;
+                                for (var i = 0; i < 3; i++) {
+                                    alert("Image Location: " + exCount);
+                                    content += "Name: " + allEmp[exCount].getAttribute("name") + "<br />";
+                                    content += "Position: " + allPos[exCount].childNodes[0].nodeValue + "<br />";
+                                    content += 'Image: <img class="employeePic" src="' + allPic[exCount].childNodes[0].nodeValue + '"><br />';
+                                    content += "<br />";
+                                    exCount++;
+                                }
+                                document.getElementById("departInfo").innerHTML = content;
+                                break;
+                            } else {
+                                deptCount++; //if department isnt found, add to the counter
+                            }
+                        }
+
                     }
                 }
             }
@@ -109,7 +131,7 @@
                   <option value="market">Marketing</option>
                   <option value="develop">Product Development</option>
                   <option value="testing">Product Testing</option>
-                  <option value="researc">Research and Development</option>
+                  <option value="research">Research and Development</option>
               </select>
 
               <div id="departInfo"></div>
