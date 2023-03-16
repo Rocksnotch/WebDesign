@@ -8,246 +8,147 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-      <main>
-        <script src="js/bootstrap.bundle.min.js"></script>
-          <div class="container-fluid headerTop">
-              <div class="row">
-                  <div class="column">
-                      <img src="images/logo-full.webp" class="img-fluid headImg" alt="..." width="300px" height="150px">
-                  </div>
-              </div>
-          </div>
-          <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="home.html">
-                    <img src="images/logo-single.webp" alt="" width="30" height="30">
-                  </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link" href="home.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active current" aria-current="page" href="employees.html" style="color:lightgreen">Departments</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+        <main>
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+            <script>
 
-          <div class="container-fluid departmentList">
-            <div class="row">
-                <div class="col">
-                    <input id="button" type="button" value="Administration" onclick="loadAdmin()"> 
+                var xmlDoc;
+                var allLoad = 0;
+
+
+                function parseXML(xml) {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", xml, false);
+                    xmlhttp.send(null);
+                    if (xmlhttp.responseXML == null) {
+                        alert("Bad XML");
+                        return -1;
+                    }
+                    xmlDoc = xmlhttp.responseXML;
+                    if (xmlDoc.nodeName == "parsererror") {
+                        alert(xmlDoc.childNodes[0].nodeValue);
+                        return -1;
+                    }
+                }
+
+                function loadContent(element) {
+                    var allDept = xmlDoc.getElementsByTagName("Department");
+                    var allEmp = xmlDoc.getElementsByTagName("Employee");
+                    var allPos = xmlDoc.getElementsByTagName("Position");
+                    var allPic = xmlDoc.getElementsByTagName("Picture");
+                    var exCount = 0;
+                    var deptCount = 0;
+
+                    var content = "";
+                    if (allLoad == 0) { //default, loads all the content on page load
+                        for (var i = 0; i < allEmp.length; i++) {
+
+                            content += '<div class="row border border-dark border-3">';
+                            content += '<div class="col">';
+                            content += '<img class="employeePic" src="' + allPic[i].childNodes[0].nodeValue + '">';
+                            content += '</div>';
+                            content += '<div class="col">';
+                            content += '<h1>' + allEmp[i].getAttribute("name") + '</h1>';
+                            content += '<h2>Position: ' + allPos[i].childNodes[0].nodeValue + '</h2>';
+                            content += '</div>';
+                            content += '</div>';
+                            content += '<br />';
+                        }
+                        document.getElementById("departInfo").innerHTML = content;
+                        allLoad++;
+                    } else {
+                        var e = document.getElementById("selectDepart").value;
+                        if (e == "all") {
+                            allLoad = 0;
+                            loadContent(null);
+                        } else {
+                            //print the actual stuff here
+
+                            for (var i = 0; i < allDept.length; i++) {
+                                if (allDept[i].getAttribute("attribute") == element.value) { //department found! Print out everyone!
+                                    exCount = deptCount * 3;
+                                    for (var i = 0; i < 3; i++) {
+
+                                        content += '<div class="row border border-dark border-3">';
+                                        content += '<div class="col">';
+                                        content += '<img class="employeePic" src="' + allPic[exCount].childNodes[0].nodeValue + '">';
+                                        content += '</div>';
+                                        content += '<div class="col">';
+                                        content += '<h1>' + allEmp[exCount].getAttribute("name") + '</h1>';
+                                        content += '<h2>Position: ' + allPos[exCount].childNodes[0].nodeValue + '</h2>';
+                                        content += '</div>';
+                                        content += '</div>';
+                                        content += '<br />';
+                                        exCount++;
+                                    }
+                                    document.getElementById("departInfo").innerHTML = content;
+                                    break;
+                                } else {
+                                    deptCount++; //if department isnt found, add to the counter
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                $(window).on("load", function () {
+                    parseXML("/xml/employees.xml");
+                    loadContent(null);
+                });
+
+
+
+
+
+            </script>
+
+            <div class="container-fluid headerTop">
+                <div class="row">
+                    <div class="column">
+                        <img src="images/logo-full.webp" class="img-fluid headImg" alt="..." width="300px" height="150px">
+                    </div>
                 </div>
-                <div class="col">
-                    <input id="button" type="button" value="Marketing" onclick="loadMarketing()">
+            </div>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="home.html">
+                        <img src="images/logo-single.webp" alt="" width="30" height="30">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active current" aria-current="page" href="employees.html" style="color:lightgreen">Departments</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col">
-                    <input id="button" type="button" value="Product Development" onclick="loadProductDev()">
-                </div>
-                <div class="col">
-                    <input id="button" type="button" value="Product Testing" onclick="loadProductTest()">
-                </div>
-                <div class="col">
-                    <input id="button" type="button" value="R&D" onclick="loadRnD()">
-                </div>
-            </div>
-          </div>
+            </nav>
 
-          <div id="administration" class="container-fluid contentEmp">
-            <div class="row border border-dark border-3">
-                <div class="col">
-                    <img class="employeePic" src="images/employees/administration/ceo.jpg">
-                </div>
-                <div class="col">
-                  <h1>Johnson Cavet</h1>
-                  <h2>Position: CEO</h2>
-                </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                  <img class="employeePic" src="images/employees/administration/coo.jpg">
-              </div>
-              <div class="col">
-                <h1>Wilhelm Cathidy</h1>
-                <h2>Position: COO</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                  <img class="employeePic" src="images/employees/administration/cfo.jpg">
-              </div>
-              <div class="col">
-                <h1>Karen Wilde</h1>
-                <h2>Position: CFO</h2>
-              </div>
-            </div>
-          </div>
+            <div class="mainContent">
+                <p>Please select a department </p>
+                <select id="selectDepart" onchange="loadContent(this)">
+                    <option value="all">All</option>
+                    <option value="admin">Administration</option>
+                    <option value="market">Marketing</option>
+                    <option value="develop">Product Development</option>
+                    <option value="testing">Product Testing</option>
+                    <option value="research">Research and Development</option>
+                </select>
 
-          <div id="marketing" class="container-fluid contentEmp">
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/marketing/head.webp">
-              </div>
-              <div class="col">
-                <h1>Jonathan Casey</h1>
-                <h2>Position: Head of Marketing</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/marketing/salesassoc1.webp">
-              </div>
-              <div class="col">
-                <h1>Jessie Robertson</h1>
-                <h2>Position: Sales Associate</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/marketing/salesassoc2.jpg">
-              </div>
-              <div class="col">
-                <h1>Krill Jacobson</h1>
-                <h2>Position: Sales Associate</h2>
-              </div>
-            </div>
-          </div>
+                <div id="departInfo" class="container-fluid contentEmp" style="display: inline-block"></div>
 
-          <div id="productDev" class="container-fluid contentEmp">
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/productdev/leaddesigner.jpg">
-              </div>
-              <div class="col">
-                <h1>Shella DeVie</h1>
-                <h2>Position: Lead Designer</h2>
-              </div>
             </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/productdev/productoverwatch.jpg">
-              </div>
-              <div class="col">
-                <h1>Jeremy Fitzgerald</h1>
-                <h2>Position: Product Overwatch</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/productdev/finalpasstech.jpg">
-              </div>
-              <div class="col">
-                <h1>Vanessa Laurel</h1>
-                <h2>Position: Final Pass Technician</h2>
-              </div>
-            </div>
-          </div>
-
-          <div id="productTest" class="container-fluid contentEmp">
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/producttest/headtester.webp">
-              </div>
-              <div class="col">
-                <h1>Johnny Patterson</h1>
-                <h2>Position: Head Tester</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/producttest/testingassoc1.jpg">
-              </div>
-              <div class="col">
-                <h1>John Quaser</h1>
-                <h2>Position: Testing Associate</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/producttest/testingassoc2.webp">
-              </div>
-              <div class="col">
-                <h1>Jon Realson</h1>
-                <h2>Position: Testing Associate</h2>
-              </div>
-            </div>
-          </div>
-
-          <div id="rnd" class="container-fluid contentEmp">
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/rnd/chiefresearcher.webp">
-              </div>
-              <div class="col">
-                <h1>Dr. Kyle Reasit</h1>
-                <h2>Position: Chief Researcher</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/rnd/materialsresearcher.jpg">
-              </div>
-              <div class="col">
-                <h1>Dr. Robert Kalienson</h1>
-                <h2>Position: Materials Researcher</h2>
-              </div>
-            </div>
-            <div class="row border border-dark border-3">
-              <div class="col">
-                <img class="employeePic" src="images/employees/rnd/labrat.jpg">
-              </div>
-              <div class="col">
-                <h1>Jonsey</h1>
-                <h2>Position: Lab Rat</h2>
-              </div>
-            </div>
-          </div>
-
-          <script type="text/javascript">
-            var button = document.getElementById("adminButton")
-            var admin = document.getElementById("administration");
-            var marketing = document.getElementById("marketing");
-            var productDev = document.getElementById("productDev");
-            var productTest = document.getElementById("productTest");
-            var rnd = document.getElementById("rnd");
-            var cont = document.getElementsByClassName("content");
-            function hideAll() {
-                admin.style.display="none";
-                marketing.style.display="none";
-                productDev.style.display="none";
-                productTest.style.display="none";
-                rnd.style.display="none";
-            }
-            function loadAdmin() {
-                hideAll();
-
-                admin.style.display="inline-block";
-            }
-            function loadMarketing() {
-                hideAll();
-                marketing.style.display="inline-block";
-            }
-            function loadProductDev() {
-                hideAll();
-                productDev.style.display="inline-block";
-            }
-            function loadProductTest() {
-                hideAll();
-                productTest.style.display="inline-block";
-            }
-            function loadRnD() {
-                hideAll();
-                rnd.style.display="inline-block";
-            }
-          </script>
         </main>
 
           <footer>
