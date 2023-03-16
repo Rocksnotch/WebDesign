@@ -44,10 +44,16 @@
                     if (allLoad == 0) { //default, loads all the content on page load
                         for (var i = 0; i < allEmp.length; i++) {
 
-                            content += allEmp[i].getAttribute("name") + "<br />";
-                            content += allPos[i].childNodes[0].nodeValue + "<br />";
-                            content += allPic[i].childNodes[0].nodeValue + "<br />";
-                            content += "<br />";
+                            content += '<div class="row border border-dark border-3">';
+                            content += '<div class="col">';
+                            content += '<img class="employeePic" src="' + allPic[i].childNodes[0].nodeValue + '">';
+                            content += '</div>';
+                            content += '<div class="col">';
+                            content += '<h1>' + allEmp[i].getAttribute("name") + '</h1>';
+                            content += '<h2>Position: ' + allPos[i].childNodes[0].nodeValue + '</h2>';
+                            content += '</div>';
+                            content += '</div>';
+                            content += '<br />';
                         }
                         document.getElementById("departInfo").innerHTML = content;
                         allLoad++;
@@ -58,7 +64,6 @@
                             loadContent(null);
                         } else {
                             //print the actual stuff here
-                            content += '<div class="container-fluid contentEmp">';
 
                             for (var i = 0; i < allDept.length; i++) {
                                 if (allDept[i].getAttribute("attribute") == element.value) { //department found! Print out everyone!
@@ -74,9 +79,9 @@
                                         content += '<h2>Position: ' + allPos[exCount].childNodes[0].nodeValue + '</h2>';
                                         content += '</div>';
                                         content += '</div>';
+                                        content += '<br />';
                                         exCount++;
                                     }
-                                    content += '</div>';
                                     document.getElementById("departInfo").innerHTML = content;
                                     break;
                                 } else {
@@ -141,7 +146,7 @@
                     <option value="research">Research and Development</option>
                 </select>
 
-                <div id="departInfo"></div>
+                <div id="departInfo" class="container-fluid contentEmp" style="display: inline-block"></div>
 
             </div>
         </main>
