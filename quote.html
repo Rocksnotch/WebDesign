@@ -14,6 +14,18 @@
         <script>
 
             function createForm() {
+
+                var arrState = [
+                    { val: 'in', text: 'In State' },
+                    { val: 'out', text: 'Out of State'}
+                ];
+
+                var arrPanel = [
+                    { val: 'panel1', text: 'Low-Cost Panel' },
+                    { val: 'panel2', text: 'Standard Panel' },
+                    { val: 'panel3', text: 'Efficient Panel' },
+                ];
+
                 $("#formArea").append(
                     $("<form/>", {
                         action: '#',
@@ -21,15 +33,66 @@
                     }).append(
                         $("<input/>", {
                             type: 'text',
-                            id: 'vname',
-                            name: 'name',
-                            placeholder: 'Your Name'
+                            id: 'sqft',
+                            name: 'sqft',
+                            placeholder: 'Roof Square Foot',
+                        }),
+                        $("<select/>", {
+                            id: 'selectState',
+                            name: 'state'
+                        }),
+                        $("<select/>", {
+                            id: 'selectPanel',
+                            name: 'panel'
+                        }),
+                        $("<input/>", {
+                            type: 'text',
+                            id: 'salesTax',
+                            name: 'salestax',
+                            class: 'inline'
+                        }),
+                        $("<input/>", {
+                            type: 'checkbox',
+                            id: 'woodedArea',
+                            name: 'woodedBox',
+                            value: 'WoodedArea'
                         })
                     )
                 )
 
-                $("#vname").before("Your Name: ");
+                $("#sqft").before("Roof Square Foot (0 if unknown): ");
+                $("#sqft").after("<br />");
+
+                $("#selectState").before("In or Out of State (Michigan): ");
+                $("#selectState").after("<br />");
+
+                $("#woodedArea").before("Is the house located near woods (Check if Yes): ");
+                $("#woodedArea").after("<br />");
+
+                $("#selectPanel").before("Which type of panel to be installed: ");
+                $("#selectPanel").after("<br />");
+
+                $("#salesTax").before('<p style="display:inline" id="salesText">State Sales Tax: </p>');
+                $("#salesTax").after('<br />');
+
+                var selState = $("#selectState");
+                var selPanel = $("#selectPanel");
+
+                $(arrState).each(function () {
+                    selState.append($("<option>").attr('value', this.val).text(this.text));
+                });
+
+                $(arrPanel).each(function () {
+                    selPanel.append($("<option>").attr('value', this.val).text(this.text));
+                });
             }
+
+            $(document).on('change', '#selectState', function () {
+                var selectedOpt = $(this).children('option:selected').val();
+                if (selectedOpt == 'in') {
+                    //CONTINUE HERE
+                }
+            });
 
             $(document).on('click', '#submit', function () {
                 if ($("#vname").val() == 0) {
@@ -81,7 +144,10 @@
             </div>
         </nav>
         <div class="mainContent">
-            <p>Wanting to get solar installed on your home? Hate having to use calculators? Great! Getting a quote has never been easier when using the</p>
+            <p>Wanting to get solar installed on your home? Hate having to use calculators?</p>
+            <p>Hate having to wait to get a quota from an email 3 weeks after you want solar?</p>
+            <p>Want to get the estimated* quoted cost of what a quote would cost?</p>
+            <p>Great! Getting a quote has never been easier when using the</p>
             <h1>Aperture Science Solar Quote Calculator™</h1>
             <div id="formArea"></div>
 

@@ -82,3 +82,9 @@ footer {
 #selectDepart {
     text-align: center;
 }
+
+.inline {
+    display: inline;
+    width: auto;
+
+}
