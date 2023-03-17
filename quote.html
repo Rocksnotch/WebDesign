@@ -13,6 +13,103 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script>
 
+            function formValidate() {
+                $letter = /^[a-zA-Z]+$/;
+                $number = /^[0-9.]+$/;
+                $errMsg = "";
+                $sqft = $("#sqft").val();
+                $state = $("#selectState").val();
+                $panel = $("#selectPanel").val();
+                $sales = $("#salesTax").val();
+                $woods = $("#woodedArea").is(':checked');
+                $errCount = 0;
+
+                $("#err").html("");
+
+                if ($sqft.match($number) == null) {
+                    if ($sqft == "") {
+                        $errMsg += "Field required - [Roof Square Foot]<br />";
+                        $errCount++;
+                    } else {
+                        $errMsg += "Please input only numbers! - [Roof Square Foot]<br />";
+                        $errCount++;
+                    }
+                }
+
+                if ($state == 'out') {
+                    if ($sales.match($number) == null) {
+                        if ($sales == "") {
+                            $errMsg += "Field required - [State Sales Tax]<br />";
+                            $errCount++;
+                        } else {
+                            $errMsg += "Please input only numbers! - [State Sales Tax]<br />";
+                            $errCount++;
+                        }
+                    }
+                }
+
+                if ($errCount > 0) {
+                    $("#err").append($errMsg);
+                } else {
+                    calculateData($sqft, $state, $panel, $sales, $woods);
+                }
+            }
+
+            function calculateData($sqft, $state, $panel, $sales, $woods) {
+                //housekeeping
+                audio = document.getElementById("doneAudio");
+                audio.pause();
+                audio.currentTime = 0;
+
+                //variables to use for math
+                $lowPanel = 69.99;
+                $medPanel = 169.99;
+                $highPanel = 399.99;
+                $inState = 59.99;
+                $outOfState = 599.99;
+                $inWoodsCost = 199.99;
+                $unknownRoof = 500;
+                $miTax = 0.06;
+                $finalCost = 0;
+                $salesCost = 0;
+
+                $("#costArea").hide();
+
+                if ($sqft == 0) {
+                    $finalCost += $unknownRoof / 10;
+                } else {
+                    $finalCost += $sqft / 10;
+                }
+
+                if ($panel == 'panel1') {
+                    $finalCost *= $lowPanel;
+                } else if ($panel == 'panel2') {
+                    $finalCost *= $medPanel;
+                } else if ($panel == 'panel3') {
+                    $finalCost *= $highPanel;
+                }
+
+                if ($woods == true) {
+                    $finalCost += $inWoodsCost;
+                }
+
+                if ($state == 'out') {
+                    $salesCost = $finalCost * $sales;
+                } else if ($state == 'in') {
+                    $salesCost = $finalCost * $miTax;
+                }
+
+                $finalCost += $salesCost;
+
+                $finalCost = parseFloat($finalCost).toFixed(2);
+
+                $("#costArea").val('$' + $finalCost);
+
+                audio.volume = 0.1;
+                audio.play();
+                $("#costArea").slideDown(1000, 'linear');
+            }
+
             function createForm() {
 
                 var arrState = [
@@ -55,7 +152,24 @@
                             type: 'checkbox',
                             id: 'woodedArea',
                             name: 'woodedBox',
-                            value: 'WoodedArea'
+                        }),
+                        $("<button/>", {
+                            type: 'button',
+                            id: 'submit',
+                            text: 'Submit'
+                        })
+                    )
+                )
+
+                $("#cost").append(
+                    $("<form/>", {
+                        action: '#',
+                        method: '#'
+                    }).append(
+                        $("<input/>", {
+                            type: 'text',
+                            id: 'costArea',
+                            name: 'costArea',
                         })
                     )
                 )
@@ -72,11 +186,14 @@
                 $("#selectPanel").before("Which type of panel to be installed: ");
                 $("#selectPanel").after("<br />");
 
-                $("#salesTax").before('<p style="display:inline" id="salesText">State Sales Tax: </p>');
+                $("#salesTax").before('<p style="display:inline" id="salesText">State Sales Tax (in cents): </p>');
                 $("#salesTax").after('<br />');
 
                 var selState = $("#selectState");
                 var selPanel = $("#selectPanel");
+
+                $("#costArea").before('Final Estimated Quote Cost (Will appear next to this): ');
+                $("#costArea").after("<br />");
 
                 $(arrState).each(function () {
                     selState.append($("<option>").attr('value', this.val).text(this.text));
@@ -85,22 +202,28 @@
                 $(arrPanel).each(function () {
                     selPanel.append($("<option>").attr('value', this.val).text(this.text));
                 });
+
+                $("#salesTax").attr('disabled', true);
+                $("#salesTax").val("Not Applicable");
+                $("#costArea").attr('readonly', true);
+                $("#costArea").hide();
+
+                
             }
 
             $(document).on('change', '#selectState', function () {
                 var selectedOpt = $(this).children('option:selected').val();
                 if (selectedOpt == 'in') {
-                    //CONTINUE HERE
+                    $("#salesTax").attr('disabled', true);
+                    $("#salesTax").val("Not Applicable");
+                } else if (selectedOpt == 'out') {
+                    $("#salesTax").attr('disabled', false);
+                    $("#salesTax").val("");
                 }
             });
 
             $(document).on('click', '#submit', function () {
-                if ($("#vname").val() == 0) {
-                    alert("Please put something into the field");
-                    $("#vname").focus();
-                } else {
-                    alert($("#vname").val());
-                }
+                formValidate();
             });
 
             $(document).ready(function () {
@@ -109,6 +232,8 @@
 
             });
         </script>
+
+        <audio src="/audio/chime.mp3" type="audio/mp3" id="doneAudio"></audio>
 
         <div class="container-fluid headerTop">
             <div class="row">
@@ -145,12 +270,16 @@
         </nav>
         <div class="mainContent">
             <p>Wanting to get solar installed on your home? Hate having to use calculators?</p>
-            <p>Hate having to wait to get a quota from an email 3 weeks after you want solar?</p>
+            <p>Hate having to wait to get a quote from an email 3 weeks after you want solar?</p>
             <p>Want to get the estimated* quoted cost of what a quote would cost?</p>
             <p>Great! Getting a quote has never been easier when using the</p>
-            <h1>Aperture Science Solar Quote Calculator™</h1>
+            <h1>Aperture Science Solar Quote Non-Calculator Calculator™</h1>
             <div id="formArea"></div>
-
+            <br />
+            <br />
+            <div id="err" style="color:firebrick"></div>
+            <br />
+            <div id="cost"></div>
         </div>
     </main>
     <footer>

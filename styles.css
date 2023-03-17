@@ -88,3 +88,7 @@ footer {
     width: auto;
 
 }
+
+#err {
+    color: red;
+}
